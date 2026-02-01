@@ -4,9 +4,99 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Workbook Publisher</title>
+    <link rel="stylesheet" href="styles/main.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="app-shell">
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <div class="app-title" data-ui-text-key="appTitle"></div>
+          <div class="project-name" data-ui-text-key="projectName"></div>
+        </div>
+        <div class="top-bar-center">
+          <div class="tab-group" id="workspaceTabGroup" role="tablist">
+            <button class="tab-button" id="tabEditorButton" type="button" data-tab-value="editor"></button>
+            <button class="tab-button" id="tabPreviewButton" type="button" data-tab-value="preview"></button>
+          </div>
+        </div>
+        <div class="top-bar-right">
+          <button class="primary-button" id="exportButton" type="button"></button>
+          <div class="segmented-toggle" id="languageToggle" role="group">
+            <button class="segmented-toggle-button" type="button" data-language-code="en">EN</button>
+            <button class="segmented-toggle-button" type="button" data-language-code="ru">RU</button>
+            <button class="segmented-toggle-button" type="button" data-language-code="fr">FR</button>
+          </div>
+          <div class="segmented-toggle" id="themeToggle" role="group">
+            <button class="segmented-toggle-button" id="themeLightButton" type="button" data-theme-mode="light"></button>
+            <button class="segmented-toggle-button" id="themeDarkButton" type="button" data-theme-mode="dark"></button>
+          </div>
+        </div>
+      </header>
+
+      <main class="app-content">
+        <section class="editor-layout" id="editorPanel">
+          <aside class="sidebar-panel">
+            <div class="panel-section">
+              <div class="panel-title" data-ui-text-key="sidebarBlocksTitle"></div>
+              <div class="block-button-grid" id="blockButtonContainer"></div>
+            </div>
+            <div class="panel-section">
+              <div class="panel-title" data-ui-text-key="sidebarOutlineTitle"></div>
+              <div class="outline-list" id="outlineListContainer"></div>
+            </div>
+          </aside>
+
+          <section class="editor-center">
+            <div class="panel-title" data-ui-text-key="editorBlocksTitle"></div>
+            <div class="block-list" id="blockListContainer"></div>
+          </section>
+
+          <aside class="sidebar-panel">
+            <div class="panel-section">
+              <div class="panel-title" data-ui-text-key="documentSettingsTitle"></div>
+              <div class="form-stack">
+                <label class="form-field">
+                  <span class="form-label" data-ui-text-key="trimSizeLabel"></span>
+                  <select class="form-select" id="trimSizeSelect"></select>
+                </label>
+                <label class="form-field horizontal">
+                  <span class="form-label" data-ui-text-key="bleedToggleLabel"></span>
+                  <input type="checkbox" class="form-toggle" id="bleedToggle" />
+                </label>
+                <label class="form-field">
+                  <span class="form-label" data-ui-text-key="pageCountLabel"></span>
+                  <input type="number" class="form-input" id="pageCountInput" min="1" />
+                </label>
+                <label class="form-field">
+                  <span class="form-label" data-ui-text-key="gutterWidthLabel"></span>
+                  <input type="number" class="form-input" id="gutterWidthInput" readonly />
+                </label>
+              </div>
+            </div>
+            <div class="panel-section">
+              <div class="panel-title" data-ui-text-key="propertiesTitle"></div>
+              <div id="blockPropertiesContainer"></div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="preview-layout is-hidden" id="previewPanel">
+          <div class="overlay-toggle-bar">
+            <div class="panel-title" data-ui-text-key="previewOverlaysTitle"></div>
+            <div class="overlay-chip-group" id="overlayToggleGroup">
+              <button class="overlay-chip" type="button" data-overlay-key="isSafeAreaVisible"></button>
+              <button class="overlay-chip" type="button" data-overlay-key="isBleedVisible"></button>
+              <button class="overlay-chip" type="button" data-overlay-key="isMarginsVisible"></button>
+              <button class="overlay-chip" type="button" data-overlay-key="isGutterVisible"></button>
+            </div>
+          </div>
+          <div class="preview-canvas" id="previewCanvas"></div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+
+    <script type="module" src="scripts/app.js"></script>
   </body>
 </html>
